@@ -1,0 +1,52 @@
+# Python CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-python/ for more details
+#
+version: 2
+jobs:
+  test:
+    docker:
+      - image: circleci/python:3.7
+        environment:
+          FLASK_ENV: test
+      - image: circleci/mysql:5.7
+        environment:
+          MYSQL_DATABASE: user_service_api_test
+          MYSQL_HOST: 127.0.0.1
+          MYSQL_ROOT_HOST: 127.0.0.1
+          MYSQL_ROOT_PASSWORD: Teko@123?
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          name: Setup application configurations
+          command: |
+            cp config/database_sample.yml config/database.yml
+            cp config/secret_sample.yml config/secret.yml
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "requirements.txt" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+      - run:
+          name: Install dependencies
+          command: |
+            pip install --user -r requirements.txt
+      - save_cache:
+          paths:
+            - ~/.cache/pip
+          key: v1-dependencies-{{ checksum "requirements.txt" }}
+      - run:
+          name: Run tests
+          command: |
+            python -m unittest discover
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test:
+          filters:
+            branches:
+              ignore:
+                - master

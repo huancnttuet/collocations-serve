@@ -1,0 +1,18 @@
+default: &default
+  CELERY_BROKER_URL: 'amqp://test:test@localhost:5672/test_vhost'
+  CELERY_RESULT_BACKEND: 'rpc://'
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+staging:
+  <<: *default
+
+uat:
+  <<: *default
+
+production:
+  <<: *default

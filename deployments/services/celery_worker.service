@@ -1,0 +1,14 @@
+Unit]
+Description=Celery Worker
+After=network.target
+
+[Service]
+User=root
+Group=root
+
+WorkingDirectory=/var/www/html/user-service-api
+#Environment="PATH=/var/www/html/user-service-api/venv/bin"
+ExecStart=/var/www/html/user-service-api/venv/bin/celery worker -A celery_worker.celery --loglevel=info
+
+[Install]
+WantedBy=multi-user.target

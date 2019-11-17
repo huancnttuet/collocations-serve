@@ -1,0 +1,23 @@
+default: &default
+  DEBUG: True
+  TESTING: False
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+  DEBUG: False
+  TESTING: True
+
+staging:
+  <<: *default
+  DEBUG: false
+
+uat:
+  <<: *default
+  DEBUG: false
+
+production:
+  <<: *default
+  DEBUG: false

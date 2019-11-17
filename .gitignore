@@ -1,0 +1,17 @@
+.idea/
+.vscode/
+
+venv/
+
+*.pyc
+__pycache__/
+
+log/
+instance/
+volumes/
+.pytest_cache/
+
+.env
+config/database.yml
+config/secret.yml
+config/celery.yml

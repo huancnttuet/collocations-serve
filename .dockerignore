@@ -1,0 +1,14 @@
+.git
+.vscode
+.idea
+
+venv
+
+**/*.pyc
+**/__pycache__
+**/.pytest_cache
+
+log/*
+instance/
+volumes/
+

@@ -1,0 +1,14 @@
+Unit]
+Description=Gunicorn instance to serve user service
+After=network.target
+
+[Service]
+User=root
+Group=root
+
+WorkingDirectory=/var/www/html/user-service-api
+#Environment="PATH=/var/www/html/user-service-api/venv/bin"
+ExecStart=/var/www/html/user-service-api/venv/bin/gunicorn --workers 3 --bind unix:user_service_api.sock --access-logfile /var/log/gunicorn-access.log --error-logfile /var/log/gunicorn-error.log --capture-output --log-level debug -m 007 wsgi:application
+
+[Install]
+WantedBy=multi-user.target

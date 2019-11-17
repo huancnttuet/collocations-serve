@@ -1,0 +1,29 @@
+default: &default
+  DATABASE: user_service_api
+  USERNAME: root
+  PASSWORD: Teko@123?
+  HOST: db
+  PORT: 3306
+  SQLALCHEMY_TRACK_MODIFICATIONS: True
+  SQLALCHEMY_ECHO: True
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+  DATABASE: user_service_api_test
+  HOST: 127.0.0.1
+  SQLALCHEMY_ECHO: False
+
+staging:
+  <<: *default
+  DATABASE: user_service_api_staging
+
+uat:
+  <<: *default
+  DATABASE: user_service_api_uat
+
+production:
+  <<: *default
+
