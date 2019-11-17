@@ -1,8 +1,8 @@
 default: &default
-  DATABASE: user_service_api
+  DATABASE: collocations_db
   USERNAME: root
-  PASSWORD: Teko@123?
-  HOST: db
+  PASSWORD: 12345678
+  HOST: localhost
   PORT: 3306
   SQLALCHEMY_TRACK_MODIFICATIONS: True
   SQLALCHEMY_ECHO: True
@@ -12,7 +12,7 @@ development:
 
 test:
   <<: *default
-  DATABASE: user_service_api_test
+  DATABASE: collocations_db_test
   HOST: 127.0.0.1
   SQLALCHEMY_ECHO: False
 
@@ -26,4 +26,3 @@ uat:
 
 production:
   <<: *default
-
