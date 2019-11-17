@@ -6,6 +6,7 @@ from flask_restplus import Api
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from celery import Celery
+from flask_cors import CORS
 
 from app.extensions.celery_utils import init_celery
 
@@ -32,6 +33,9 @@ def create_app(env, **kwargs):
     from commands import register_commands
 
     app = Flask(__name__)
+    cors = CORS(app)
+    app.config['CORS_HEADERS'] = 'Content-Type'
+
     if kwargs.get("celery"):
         init_celery(kwargs.get("celery"), app)
     app.config.from_object(Config(env))
